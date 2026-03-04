@@ -92,3 +92,9 @@ const interviewCount = document.getElementById('interviewCount');
 const rejectedCount = document.getElementById('rejectedCount');
 const tabJobCount = document.getElementById('tabJobCount');
 
+
+function updateDashboard() {
+  totalCount.textContent = jobs.length;
+  interviewCount.textContent = jobs.filter(j => j.status === 'interview').length;
+  rejectedCount.textContent = jobs.filter(j => j.status === 'rejected').length;
+}
