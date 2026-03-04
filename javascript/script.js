@@ -1,4 +1,3 @@
-
 let activeTab = 'all';
 
 const jobs = [
@@ -99,6 +98,7 @@ function updateDashboard() {
   rejectedCount.textContent = jobs.filter(j => j.status === 'rejected').length;
 }
 
+
 function updateTabs() {
   document.querySelectorAll('.tab').forEach(tab => {
     tab.classList.toggle('active', tab.dataset.tab === activeTab);
@@ -106,4 +106,89 @@ function updateTabs() {
 }
 
 
+function renderJobs() {
+  jobList.innerHTML = '';
 
+  const filteredJobs =
+    activeTab === 'all'
+      ? jobs
+      : jobs.filter(job => job.status === activeTab);
+
+  tabJobCount.textContent = `${filteredJobs.length} jobs`;
+
+ 
+  if (filteredJobs.length === 0) {
+    emptyState.style.display = 'block';
+    return;
+  } else {
+    emptyState.style.display = 'none';
+  }
+
+  filteredJobs.forEach(job => {
+    const card = document.createElement('div');
+    card.className = 'job-card';
+
+    const badgeText =
+      job.status === 'not_applied'
+        ? 'NOT APPLIED'
+        : job.status.toUpperCase();
+
+    card.innerHTML = `
+      <span class="delete">🗑</span>
+      <h3>${job.company}</h3>
+      <strong>${job.position}</strong>
+      <p>${job.location} • ${job.type} • ${job.salary}</p>
+      <span class="badge ${job.status}">${badgeText}</span>
+      <p>${job.description}</p>
+      <div class="actions">
+        <button class="interview">Interview</button>
+        <button class="rejected">Rejected</button>
+      </div>
+    `;
+
+    
+card.querySelector('.interview').onclick = () => {
+  job.status =
+    job.status === 'interview'
+      ? 'not_applied'
+      : 'interview';
+
+  updateUI(); 
+};
+
+card.querySelector('.rejected').onclick = () => {
+  job.status =
+    job.status === 'rejected'
+      ? 'not_applied'
+      : 'rejected';
+
+  updateUI(); 
+};
+
+   
+    card.querySelector('.delete').onclick = () => {
+      const index = jobs.findIndex(j => j.id === job.id);
+      if (index !== -1) {
+        jobs.splice(index, 1);
+        updateUI();
+      }
+    };
+
+    jobList.appendChild(card);
+  });
+}
+
+function updateUI() {
+  updateDashboard();
+  updateTabs();
+  renderJobs();
+}
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    activeTab = tab.dataset.tab;
+    updateUI();
+  });
+});
+
+updateUI();
