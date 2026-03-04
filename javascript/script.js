@@ -1,7 +1,8 @@
+
 let activeTab = 'all';
 
 const jobs = [
-   {
+  {
     id: 1,
     company: 'Mobile First Corp',
     position: 'React Native Developer',
@@ -80,5 +81,14 @@ const jobs = [
     salary: '$115k - $145k',
     description: 'Design and maintain scalable UI systems.',
     status: 'not_applied'
-  } 
+  }
 ];
+
+
+const jobList = document.getElementById('jobList');
+const emptyState = document.getElementById('emptyState');
+const totalCount = document.getElementById('totalCount');
+const interviewCount = document.getElementById('interviewCount');
+const rejectedCount = document.getElementById('rejectedCount');
+const tabJobCount = document.getElementById('tabJobCount');
+
