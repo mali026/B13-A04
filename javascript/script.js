@@ -106,48 +106,4 @@ function updateTabs() {
 }
 
 
-function renderJobs() {
-  jobList.innerHTML = '';
 
-  const filteredJobs =
-    activeTab === 'all'
-      ? jobs
-      : jobs.filter(job => job.status === activeTab);
-
-  tabJobCount.textContent = `${filteredJobs.length} jobs`;
-
-  // Empty state handling
-  if (filteredJobs.length === 0) {
-    emptyState.style.display = 'block';
-    return;
-  } else {
-    emptyState.style.display = 'none';
-  }
-
-  filteredJobs.forEach(job => {
-    const card = document.createElement('div');
-    card.className = 'job-card';
-
-    const badgeText =
-      job.status === 'not_applied'
-        ? 'NOT APPLIED'
-        : job.status.toUpperCase();
-
-    card.innerHTML = `
-      <span class="delete">🗑</span>
-      <h3>${job.company}</h3>
-      <strong>${job.position}</strong>
-      <p>${job.location} • ${job.type} • ${job.salary}</p>
-      <span class="badge ${job.status}">${badgeText}</span>
-      <p>${job.description}</p>
-      <div class="actions">
-        <button class="interview">Interview</button>
-        <button class="rejected">Rejected</button>
-      </div>
-    `;
-
-    /* ===== TOGGLE LOGIC (FIXED) ===== */
-
-
-
-}
