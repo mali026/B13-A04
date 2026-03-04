@@ -30,8 +30,27 @@
             </div>
         </section>
 
-        <section>
+        <section class="jobs-section">
+          <div class="jobs-header">
+             <h2>Available Jobs</h2>
+             <span id="tabJobCount">8 jobs</span>
+          </div>
 
+          <div class="tabs">
+             <button class="tab active" data-tab="all">All</button>
+
+             <button class="tab" data-tab="interview">Interview</button>
+
+             <button class="tab" data-tab="rejected">Rejected</button>
+          </div>
+
+          <div id="jobList" class="job-list"></div>
+
+          <div id="emptyState" class="empty-state">
+            <img src="B13-A4-PH-Job-Tracker/jobs.png" alt="no jobs">
+            <h3>No jobs available</h3>
+            <p>Check back soon for new job opportunities</p>
+          </div>
         </section>
 
     </main>
